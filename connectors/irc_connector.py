@@ -11,18 +11,35 @@
 ###########################################
 
 from classes.connector import Connector
-from twisted.words.protocols import irc
+from pydle import Client
 
 
-class IrcConnector(Connector, irc.IRCClient):
-    nick = ""
+class IrcConnector(Connector, Client):
+    nickname = ""
     channel = ""
     password = ""
     server = ""
     port = 6667
+    tls = False
+    tls_verify = False
 
     def __init__(self):
-        irc.IRCClient.__init__()
+        pass
+
+    async def on_connect(self):
+        await super().on_connect()
+        await self.join(self.channel)
+
+    def connector_run(self):
+        Client.__init__(self, self.nickname)
+        self.run(self.server, self.tls, self.tls_verify)
+
+    async def send_message(self, user, channel, message, icon=""):
+         await self.message(channel, message)
+
+    async def on_message(self, channel, sender, message):
+        if sender != self.nickname:
+            await self.received_message(sender, channel, message)
 
     def privmsg(self, user, channel, message):
         self.received_message(user, channel, message)

@@ -5,7 +5,7 @@
 - Python 3.7
 - Discord.py 1.0
 - requests
-- Twisted
+- Pydle
 
 ## Description
 

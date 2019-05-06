@@ -50,9 +50,8 @@ class HelpCommand(Command):
     async def action(self, sender, channel, args):
         if args[0] not in self.connector.commands:
             await self.send_message(sender, channel, "command " + args[0] + " does not exist.")
-        await self.send_message(sender, channel, self.connector.commands[args[0]].helpMessage,
-                                    "https://i.imgur.com/LqUmKRh.png")
-
+        await self.send_message(sender, channel, self.connector.commands[args[0]].helpMessage)
+#                                 "https://i.imgur.com/LqUmKRh.png"
 
 class QueueCommand(Command):
     requiredArgs = 0
@@ -66,7 +65,7 @@ class QueueCommand(Command):
 
 class FullQueueCommand(Command):
     requiredArgs = 0
-    helpMessage = ""
+    helpMessage = "Shows all replay queues"
 
     async def action(self, sender, channel, args):
         response = requests.get("https://calculated.gg/api/global/queue/count").json()
@@ -81,7 +80,7 @@ class FullQueueCommand(Command):
 
 class ProfileCommand(Command):
     requiredArgs = 1
-    helpMessage = ""
+    helpMessage = "Get profile information for player"
 
     async def action(self, sender, channel, args):
         player_id = get_player_id(args[0])
@@ -95,27 +94,27 @@ class ProfileCommand(Command):
         except KeyError:
             await self.connector.send_message(sender, channel, "User could not be found, please try again")
 
-        list_past_names = ""
+        list_past_names = []
         for name in past_names:
-            list_past_names += name + "\n"
+            list_past_names.append(name)
 
-        say = "Favourite car: " + car_name + " (" + car_percentage + "). Past names: " + list_past_names
+        say = "Favourite car: " + car_name + " (" + car_percentage + "). Past names: " + "\n".join(list_past_names)
 
         await self.send_message(sender, channel, say)
 
 
 class RanksCommand(Command):
     requiredArgs = 1
-    helpMessage = ""
+    helpMessage = "Get rank data for player"
 
     async def action(self, sender, channel, args):
         player_id = get_player_id(args[0])
         ranks = requests.get("https://calculated.gg/api/player/{}/ranks".format(player_id)).json()
 
-        say = ""
+        say = []
 
         order = ['duel', 'doubles', 'solo', 'standard', 'hoops', 'rumble', 'dropshot', 'snowday']
         for playlist in order:
-            say += playlist.title() + ": " + ranks[playlist]['name'] + " - " + str(ranks[playlist]['rating']) + "\n"
+            say.append(playlist.title() + ": " + ranks[playlist]['name'] + " - " + str(ranks[playlist]['rating']))
 
-        await self.send_message(sender, channel, say)
+        await self.send_message(sender, channel, "\n".join(say))

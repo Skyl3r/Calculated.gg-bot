@@ -8,9 +8,10 @@
 #
 ############################################
 
+from classes.message import Message
 
 class Connector:
-    
+
     # Discord seems to support the most commands
     # So all commands will be based on discord
 
@@ -34,7 +35,7 @@ class Connector:
         pass
 
     # Send message to channel
-    def send_message(self, user, channel, message, icon=""):
+    async def send_message(self, message):
         pass
 
     async def received_message(self, sender, channel, message):

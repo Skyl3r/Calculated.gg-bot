@@ -11,9 +11,11 @@
 #
 ###########################################
 
-from discord import Client
+from discord import Client, Embed
+from discord.channel import *
 
 from classes.connector import Connector
+from classes.message import Message
 
 
 class DiscordConnector(Connector, Client):
@@ -27,9 +29,10 @@ class DiscordConnector(Connector, Client):
     def connector_run(self):
         self.run(self.token)
 
-    async def send_message(self, user, channel, message, icon=""):
-        channel = self.get_channel(channel)
-        await channel.send(message)
+    async def send_message(self, message: Message):
+        channel = self.get_channel(message.target)
+
+        await channel.send(embed=message.message_embed)
 
     # Discord Methods
     async def on_ready(self):

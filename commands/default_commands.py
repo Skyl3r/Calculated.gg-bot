@@ -10,6 +10,7 @@
 
 import requests
 from classes.command import Command
+from classes.message import Message
 
 ##########################
 # Helper Functions
@@ -41,7 +42,7 @@ def get_player_profile(player_id):
 # Help command, gets help message for given command
 class HelpCommand(Command):
     # Requires one arg. The name of the command
-    requiredArgs = -1
+    requiredArgs = 1
 
     # Simple message there...
     helpMessage = """do <prefix>help [command name] for more information on a command.
@@ -49,9 +50,14 @@ class HelpCommand(Command):
 
     async def action(self, sender, channel, args):
         if args[0] not in self.connector.commands:
-            await self.send_message(sender, channel, "command " + args[0] + " does not exist.")
-        await self.send_message(sender, channel, self.connector.commands[args[0]].helpMessage)
-#                                 "https://i.imgur.com/LqUmKRh.png"
+            await self.send_message(Message().set_target(channel).add_field(name="Not a command", value=args[0]))
+
+        message = Message().set_target(channel)
+        message.set_author(name="Help", icon_url="https://i.imgur.com/LqUmKRh.png", url="")
+        message.add_field(name=args[0], value=self.connector.commands[args[0]].helpMessage)
+
+        await self.send_message(message)
+
 
 class QueueCommand(Command):
     requiredArgs = 0
@@ -59,8 +65,11 @@ class QueueCommand(Command):
 
     async def action(self, sender, channel, args):
         response = requests.get("https://calculated.gg/api/global/queue/count").json()
-        print(response[2]["count"])
-        await self.send_message(sender, channel, str(response[2]["count"]) + ' replays in the queue.')
+
+        message = Message().set_target(channel)
+        message.add_field(name="Replays in Queue", value=str(response[2]["count"]))
+
+        await self.send_message(message)
 
 
 class FullQueueCommand(Command):
@@ -69,13 +78,13 @@ class FullQueueCommand(Command):
 
     async def action(self, sender, channel, args):
         response = requests.get("https://calculated.gg/api/global/queue/count").json()
-        say = "Number of replays in each queue."
 
+        message = Message().set_target(channel)
+        message.set_author(name="All Replay Queues")
         for priority in response:
-            msg = str(priority["count"])
-            say += " " + str(priority["name"]) + " " + msg
+            message.add_field(name=str(priority["name"]), value=str(priority["count"]))
 
-        await self.send_message(sender, channel, say)
+        await self.send_message(message)
 
 
 class ProfileCommand(Command):
@@ -98,9 +107,12 @@ class ProfileCommand(Command):
         for name in past_names:
             list_past_names.append(name)
 
-        say = "Favourite car: " + car_name + " (" + car_percentage + "). Past names: " + "\n".join(list_past_names)
+        message = Message().set_target(channel)
+        message.set_author(name="Profile Information")
+        message.add_field(name="Favourite Car", value=car_name + " (" + car_percentage + ")")
+        message.add_field(name="Past names", value="\n".join(list_past_names))
 
-        await self.send_message(sender, channel, say)
+        await self.send_message(message)
 
 
 class RanksCommand(Command):
@@ -111,10 +123,11 @@ class RanksCommand(Command):
         player_id = get_player_id(args[0])
         ranks = requests.get("https://calculated.gg/api/player/{}/ranks".format(player_id)).json()
 
-        say = []
+        message = Message().set_target(channel)
+        message.set_author(name="Ranks")
 
         order = ['duel', 'doubles', 'solo', 'standard', 'hoops', 'rumble', 'dropshot', 'snowday']
         for playlist in order:
-            say.append(playlist.title() + ": " + ranks[playlist]['name'] + " - " + str(ranks[playlist]['rating']))
+            message.add_field(name=playlist.title(), value=ranks[playlist]['name'] + " - " + str(ranks[playlist]['rating']))
 
-        await self.send_message(sender, channel, "\n".join(say))
+        await self.send_message(message)

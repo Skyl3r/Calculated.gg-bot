@@ -6,6 +6,7 @@
 # -Skyl3r
 ##########################################
 
+from classes.message import Message
 
 class Command:
 
@@ -20,6 +21,6 @@ class Command:
     async def action(self, sender, channel, args):
         pass
 
-    async def send_message(self, sender, channel, message):
-        await self.connector.send_message(sender, channel, message)
+    async def send_message(self, message: Message):
+        await self.connector.send_message(message)
     pass

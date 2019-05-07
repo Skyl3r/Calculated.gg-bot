@@ -10,6 +10,7 @@
 #
 ###########################################
 
+from discord import Embed
 from classes.connector import Connector
 from pydle import Client
 
@@ -34,8 +35,14 @@ class IrcConnector(Connector, Client):
         Client.__init__(self, self.nickname)
         self.run(self.server, self.tls, self.tls_verify)
 
-    async def send_message(self, user, channel, message, icon=""):
-         await self.message(channel, message)
+    async def send_message(self, message):
+        message.message_embed: Embed
+
+        say = []
+        for field in message.message_embed.fields:
+            say.append(field.name + " - " + field.value)
+
+        await self.message(message.target, " | ".join(say))
 
     async def on_message(self, channel, sender, message):
         if sender != self.nickname:

@@ -18,6 +18,8 @@
 
 ## Description
 
+This is a rewrite of the calculated.gg bot from [SaltieRL](https://github.com/SaltieRL/discord-bot). This bot provides functionality such as checking ranks and getting some basic stats. It provides connectors to use IRC or Discord.
+
 A couple changes are made in the logic of the bot to reduce code redundancy over the existing bot. The core functionality of the bot revolves around two core classes. `Command` and `Connector`.
 
 #### Command

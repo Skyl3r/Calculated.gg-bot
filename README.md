@@ -24,3 +24,8 @@ Command is a template class that has the following attributes you can set:
 - `message_received(sender, channel, message)`: this is used to parse messages and execute commands
 - `connector_run()`: this should start the connector.
 - `send_message(sender, channel, message)`: this should send a message to the target platform
+
+
+#### Message
+
+The `Message` class is essentially a wrapper for Discord.Embed. It is used as a compatibility layer to provide nicer formatting for platforms that support it.

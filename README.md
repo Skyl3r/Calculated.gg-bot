@@ -10,7 +10,7 @@
     - [Debian](#debian)
 
 ## Dependencies
-- Python 3.7
+- Python 3.5.3+
 - [Discord.py](https://github.com/Rapptz/discord.py)
 - [requests](https://github.com/kennethreitz/requests)
 - [Pydle](https://github.com/Shizmob/pydle)
@@ -44,7 +44,7 @@ The `Message` class is essentially a wrapper for Discord.Embed. It is used as a 
 
 #### Debian
 
-1. Make sure you have Python 3.7 and pip for Python 3.7. At the present time these are available in buster (current unstable).
+1. Make sure you have Python 3.5.3 and pip
 ```bash
 apt update
 apt install python3 python3-pip

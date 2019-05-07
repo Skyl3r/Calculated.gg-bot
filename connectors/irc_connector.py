@@ -29,7 +29,6 @@ class IrcConnector(Connector, Client):
 
     async def on_connect(self):
         await super().on_connect()
-
         for channel in self.channel_list:
             print("Joining: " + channel)
             await self.join(channel)
@@ -48,7 +47,7 @@ class IrcConnector(Connector, Client):
             else:
                 say.append(field.value)
 
-        await self.message(message.target, " | ".join(say))
+        await self.message(message.target, " | ".join(say).replace("\n", ", "))
 
     async def on_message(self, channel, sender, message):
         if sender != self.nickname:

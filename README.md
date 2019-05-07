@@ -1,6 +1,6 @@
 # Calculated.gg-bot
 
-### Index
+## Index
 1. [Dependencies](#dependencies)
 2. [Description](#description)
     - [Command](#command)

@@ -5,7 +5,8 @@
 - Python 3.7
 - Discord.py 1.0
 - requests
-- Pydle
+- [Pydle](https://github.com/Shizmob/pydle)
+- [profanity-check](https://github.com/vzhou842/profanity-check)
 
 ## Description
 
@@ -29,3 +30,27 @@ Command is a template class that has the following attributes you can set:
 #### Message
 
 The `Message` class is essentially a wrapper for Discord.Embed. It is used as a compatibility layer to provide nicer formatting for platforms that support it.
+
+
+## Setup
+
+#### Debian
+
+1. Make sure you have Python 3.7 and pip for Python 3.7. At the present time these are available in buster (current unstable).
+```bash
+apt update
+apt install python3 python3-pip
+```
+2. Install necessary Python dependencies.
+```bash
+apt install python3-requests
+pip3 install discord pydle profanity-check
+```
+3. Clone Calculated.gg-bot
+```bash
+git clone https://github.com/Skyl3r/Calculated.gg-bot
+```
+4. Review `irc_example.py` or `discord_example.py` to create your run script. Then launch by running:
+```bash
+python3 irc_example.py # Or discord_example.py
+```

@@ -17,7 +17,7 @@ from pydle import Client
 
 class IrcConnector(Connector, Client):
     nickname = ""
-    channel = ""
+    channel_list = []
     password = ""
     server = ""
     port = 6667
@@ -29,7 +29,10 @@ class IrcConnector(Connector, Client):
 
     async def on_connect(self):
         await super().on_connect()
-        await self.join(self.channel)
+
+        for channel in self.channel_list:
+            print("Joining: " + channel)
+            await self.join(channel)
 
     def connector_run(self):
         Client.__init__(self, self.nickname)

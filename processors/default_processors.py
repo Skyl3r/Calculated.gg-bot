@@ -12,7 +12,6 @@ class ProfanityCheckProcessor(Processor):
         quick_chats = ["OMG!", "Wow!", "Okay.", "Savage!", "Thanks!", "Holy cow!"]
 
         profanity = predict_prob([message])
-        print(profanity[0])
         if profanity[0] > 0.35:
             say = Message().set_target(channel)
             say.add_field(name="", value=random.choice(quick_chats))

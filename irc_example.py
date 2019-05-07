@@ -5,8 +5,9 @@ from processors.default_processors import *
 # Example of launching discord bot
 connector = IrcConnector()
 connector.nickname = "RLRankTracker"
-connector.channel = "##rocketleague"
 connector.server = "irc.freenode.net"
+connector.channel_list.append("#davc")
+connector.channel_list.append("##rocketleague")
 
 commands = {
     "help": HelpCommand(connector),

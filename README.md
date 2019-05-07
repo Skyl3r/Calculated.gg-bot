@@ -1,10 +1,18 @@
 # Calculated.gg-bot
 
+### Index
+1. [Dependencies](#dependencies)
+2. [Description](#description)
+    - [Command](#command)
+    - [Connector](#connector)
+    - [Message](#message)
+3. [Setup](#setup)
+    - [Debian](#debian)
 
 ## Dependencies
 - Python 3.7
-- Discord.py 1.0
-- requests
+- [Discord.py](https://github.com/Rapptz/discord.py)
+- [requests](https://github.com/kennethreitz/requests)
 - [Pydle](https://github.com/Shizmob/pydle)
 - [profanity-check](https://github.com/vzhou842/profanity-check)
 

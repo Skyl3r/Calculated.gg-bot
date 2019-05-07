@@ -18,6 +18,9 @@ class Connector:
     # each connector will implement commands as it can
     commands = {}
 
+    # each connector can have precommand processing
+    precommand_processors = {}
+
     prefix = "!"
 
     def __init__(self):
@@ -39,6 +42,9 @@ class Connector:
         pass
 
     async def received_message(self, sender, channel, message):
+        for processor in self.precommand_processors:
+            await processor.action(sender=sender, channel=channel, message=message)
+
         if message.startswith(self.prefix):
             # Get everything after the prefix and split by spaces to get command/arguments
             message_components = message[len(self.prefix):].split(" ")

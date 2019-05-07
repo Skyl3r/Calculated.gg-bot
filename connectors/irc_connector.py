@@ -40,7 +40,10 @@ class IrcConnector(Connector, Client):
 
         say = []
         for field in message.message_embed.fields:
-            say.append(field.name + " - " + field.value)
+            if field.name != "":
+                say.append(field.name + " - " + field.value)
+            else:
+                say.append(field.value)
 
         await self.message(message.target, " | ".join(say))
 

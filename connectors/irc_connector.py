@@ -4,7 +4,7 @@
 #
 #  Will implement connectors and override
 #  methods to create an abstraction layer
-#  uses twisted
+#  uses Pydle
 #
 #  -Skyl3r
 #

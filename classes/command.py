@@ -21,6 +21,7 @@ class Command:
     async def action(self, sender, channel, args):
         pass
 
+    # An alias for self.connector.send_message...
     async def send_message(self, message: Message):
         await self.connector.send_message(message)
     pass

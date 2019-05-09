@@ -45,7 +45,7 @@ The `Message` class is essentially a wrapper for Discord.Embed. It is used as a 
 
 ## Setup
 
-#### Debian
+#### Debian & Ubuntu
 
 1. Make sure you have Python 3.5.3 and pip
 ```bash

@@ -7,7 +7,7 @@
     - [Connector](#connector)
     - [Message](#message)
 3. [Setup](#setup)
-    - [Debian](#debian--ubuntu)
+    - [Debian & Ubuntu](#debian--ubuntu)
     - [Windows](#windows-with-chocolatey)
 
 ## Dependencies

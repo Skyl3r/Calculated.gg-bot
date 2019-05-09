@@ -66,7 +66,7 @@ git clone https://github.com/Skyl3r/Calculated.gg-bot
 python3 irc_example.py # Or discord_example.py
 ```
 
-#### Windows (With Chocolatey)
+#### Windows (With [Chocolatey](https://chocolatey.org/install))
 
 1. Make sure you have Python 3.5.3+, pip and git.
 ```cmd
@@ -75,7 +75,7 @@ choco install python3 pip git -y
 
 2. Install necessary python dependencies. If you did not have python or pip, you will need to restart command prompt.
 ```cmd
-pip install discord pydle profanity-check
+pip install discord pydle profanity-check requests
 ```
 
 3. Clone Calculated.gg-bot. CD to a directory you would like to run Calculated.gg-bot from and use git clone to clone the repository.

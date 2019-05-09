@@ -8,7 +8,7 @@
     - [Message](#message)
 3. [Setup](#setup)
     - [Debian](#debian)
-    - [Windows](#windows)
+    - [Windows](#windows-with-chocolatey)
 
 ## Dependencies
 - Python 3.5.3+
